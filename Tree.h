@@ -1,21 +1,42 @@
 #ifndef TREE_H
 #define TREE_H
 #include "Node.h"
-
+#include <iostream>
 
 template <typename T>
 
-class Tree:public Node<T>
+class Tree
 {
 
 public:
     Node<T> *root;
 
-    Tree(void):root(nullptr){
+    Tree(void):root(nullptr) {
     }
 
-    void insertNode(Node<T>*element){
+    void insert(const T& element){ 
+        Tree<T>*aux = new Tree<T>;
+        std::cout<<root<<std::endl<<aux<<std::endl;
+        if (root)
+        {   
+            if(element < root-> get_element()){
+                aux->root=root->left;
+                aux->insert(element);}
 
+            else if(element>root->get_element()){
+                aux->root= root->right;
+                aux->insert(element);} 
+        }
+        else if (root==nullptr)
+        {  
+            Node<T> *nuevo = new Node<T>(element);
+            root = nuevo;
+            delete aux;
+        }    
+    }
+
+    bool verificar(T valor){
+        
     }
 
     void deleteNode(Node<T>*element){

@@ -17,6 +17,12 @@ public:
         this->left = this->right = nullptr;
     }
     ~Node();
+    void set_element(const T& element){
+        key = element;
+    }
+    T get_element(){
+        return Node<T>::key;
+    }
 };
 
 
