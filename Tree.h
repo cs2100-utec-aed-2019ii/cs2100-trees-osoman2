@@ -14,34 +14,38 @@ public:
     Tree(void):root(nullptr) {
     }
 
-    void insert(const T& element){ 
-        Tree<T>*aux = new Tree<T>;
-        std::cout<<root<<std::endl<<aux<<std::endl;
-        if (root)
-        {   
-            if(element < root-> get_element()){
-                aux->root=root->left;
-                aux->insert(element);}
 
-            else if(element>root->get_element()){
-                aux->root= root->right;
-                aux->insert(element);} 
+
+
+
+    void insert(const T& element){
+        insert(element,root);   
+    }
+    void deleteNode(const T& element){
+        deleteNode(element,root);
+    }
+    //minnode    
+    Node<T>* findmin(Node<T>*aux){
+        if(aux){
+          while( aux->left) {
+            aux = aux->left;
+          }
+          return aux;
         }
-        else if (root==nullptr)
-        {  
-            Node<T> *nuevo = new Node<T>(element);
-            root = nuevo;
-            delete aux;
-        }    
+    }
+    Node<T>* findmax(Node<T>*aux){
+      if(aux){
+          while( aux->right) {
+            aux = aux->right;
+          }
+          return aux;
+        }
     }
 
     bool verificar(T valor){
         
     }
 
-    void deleteNode(Node<T>*element){
-        
-    }
 
     unsigned int height(Tree<T>&){
 
@@ -93,6 +97,43 @@ public:
     int leafheigh(){
 
     }
+
+    //sobrecargas
+
+    void insert(const T &Element, Node<T>*&nodo ) {
+    if (nodo ==nullptr){
+        nodo = new Node<T>(Element);
+    } else if ( Element < nodo->key ) {
+          insert( Element, nodo->left );
+    } else if ( Element > nodo->key ) {
+          insert( Element, nodo->right );
+      } 
+    }
+
+    void deleteNode(const T &Element, Node<T>*&nodo){
+       if (nodo ==nullptr){
+        std::cout<<"El arbol esta vacio"<<std::endl;
+        return;
+      }
+      else{
+        if ( Element < nodo->key ) {
+          deleteNode( Element, nodo->left );
+       } else if ( Element > nodo->key ) {
+          deleteNode( Element, nodo->right );
+        }
+      else if(nodo->left!=nullptr && nodo->right!= nullptr){
+          nodo->set_element(findmin(nodo->right)->key);
+          delete(nodo->key, nodo->right);
+      }
+      else{
+          Node<T>* oldnodo = nodo;
+            nodo = (nodo->left!=nullptr) ? nodo->left : nodo->right;
+            delete oldnodo;
+        }
+      }
+    }
+
+
 };
 
 
