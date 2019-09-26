@@ -44,23 +44,22 @@ public:
         
     }
 
-    unsigned int hight(){
-      return hight(root);
+    unsigned int hight(void){
+      return hight(root,0);
     }
-    int hight(Node<T> *nodo){
+    unsigned int hight(Node<T> *nodo,unsigned int tam){
       if(nodo == nullptr){
-        return -1;
+        return tam;
       }
       else{
-        unsigned int L= hight(nodo->left);
-        unsigned int R= hight(nodo->right);
-        return (L<R?R:L);
+        unsigned int L= hight(nodo->left,tam);
+        unsigned int R= hight(nodo->right,tam);
+        tam = L<R?R:L;
+        return tam+1;
       }
     } 
 
-    void clear(void){
-
-    }
+    
 
 
     void int_tr(void){
@@ -86,9 +85,33 @@ public:
     bool complete(Tree&){
 
     }
+    
+    void clear(void){
+      std::cout<<"Eliminación de nodos: ";
+      clear(root);
+      std::cout<<std::endl;
+    }
 
-    Node<T>* ancestor(Node<T>* nodo){
-
+    Node<T>* ancestor(Node<T>*nodo){
+      return ancestor(root,nodo);
+    }
+    
+    
+    
+    
+    //definición
+    Node<T>* ancestor(Node<T>* nodo,Node<T>*buscado){
+        if(nodo){
+          if(buscado->key<nodo->key){
+            if(buscado->key==nodo->left->key ||buscado->key== nodo->right->key) return nodo;
+            else return ancestor(nodo->left,buscado);
+          }
+          else if(buscado->key>nodo->key){
+            if (buscado->key==nodo->left->key ||buscado->key== nodo->right->key) return nodo;
+            else return ancestor(nodo->right,buscado);
+          }
+        }
+        else return nullptr;
     }
 
     void printtree(Tree&){
@@ -170,6 +193,17 @@ public:
     std::cout << nodo->key << " " ; 
     }
   }
+
+  //definiendo clear
+
+    void clear(Node<T>*&nodo){
+      if (nodo == NULL) return;  
+  
+     clear(nodo->left);  
+     clear(nodo->right);  
+     std::cout << "\n Nodo eliminado: " << nodo->key;  
+      free(nodo); 
+    }
 
 };
 
