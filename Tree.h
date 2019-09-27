@@ -19,6 +19,7 @@ public:
     }
     
     void deleteNode(const T& element){
+          std::cout<<"El nodo eliminado es: "<<element<<std::endl;
          deleteNode(root,element);
     }
     //minnode    
@@ -57,8 +58,6 @@ public:
     } 
 
     
-
-
     void int_tr(void){
       std::cout<<"In-order:"<<std::endl;
       inO(root);
@@ -92,16 +91,19 @@ public:
        }
     }
 
-    bool BSTvalidate(Node<T>*n){
-        if(n->left->key>n->key||n->right->key<n->key)return false;
-        else if(n->left->key<n->key){
-            BSTvalidate(n->left);
-        }
 
-        else if(n->right->key>n->key){
-            BSTvalidate(n->right);
-        }
+    //validación--------------
+    bool BSTvalidate(){
+      return BSTvalidate(root,findmin(root)->key,findmax(root)->key);
     }
+    bool BSTvalidate(Node<T> *node, const T& minKey,const T&maxKey) {
+    if (node == nullptr) return true;
+    if (node->key < minKey || node->key > maxKey) return false;
+    
+    return BSTvalidate(node->left, minKey, node->key-1) && BSTvalidate(node->right, node->key+1, maxKey);
+    }
+
+    //---------------------------
     
     void clear(void){
       std::cout<<"Eliminación de arbol por nodos: ";

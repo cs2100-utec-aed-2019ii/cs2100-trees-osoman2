@@ -24,14 +24,17 @@ int main(){
     cout<<farbol->root->left->key <<endl;
     cout<<farbol->root->right->key<<endl;
   
-    //farbol->deleteNode(2);
+    //
     cout<<farbol->root->key<<endl;
     farbol->pret_tr();farbol->int_tr();farbol->post_tr(); 
     cout<<"Altura:"<<farbol->hight()<<endl;
     
     cout<<"El ancestro de "<<(farbol->ancestor((farbol->root->right)->right))->key<<" es "<<farbol->root->key<<endl;
+ 
+    farbol->deleteNode(2);
     farbol->deleteNode(5);
     farbol->pret_tr();farbol->int_tr();farbol->post_tr();
+    cout<<"1 si es ABS,0 si no lo es: "<<farbol->BSTvalidate()<<endl;
     farbol->clear();
     
 
