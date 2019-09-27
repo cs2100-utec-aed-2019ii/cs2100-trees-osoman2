@@ -20,6 +20,10 @@ int main(){
     farbol1->insert(3);
     farbol1->insert(4);
     farbol1->insert(2);    
+    farbol1->insert(7);
+    farbol1->insert(9);
+    //farbol->insert(8);
+    farbol1->insert(6);
 
     cout<<"Imprimiendo arbol1"<<endl;
     farbol1->printtree();
@@ -39,7 +43,7 @@ int main(){
    // farbol->deleteNode(2);
     //farbol->deleteNode(5);
     farbol->countNodes();
-    farbol->pret_tr();farbol->int_tr();farbol->post_tr();
+  
     cout<<"1 si es ABS,0 si no lo es: "<<farbol->BSTvalidate()<<endl;
     cout<<"1 si es Completo,0 si no lo es: "<<farbol->validateComplete()<<endl;
     cout<<"1 si es AVL,0 si no lo es: "<<farbol->checkAVL()<<endl;

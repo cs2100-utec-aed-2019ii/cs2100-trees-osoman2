@@ -260,10 +260,6 @@ void deleteNode(Node<T>* nodo, const T& key)
 }
 
 
-
-
-
-
 //---------------
   //definicion de recorridos
 
