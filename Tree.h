@@ -26,19 +26,16 @@ public:
     bool validateComplete(){
         return validateComplete(root,0,countNodes(root));
     }
-    bool checksametree(Tree<T>*& tree){
-      return checksametree(root,tree->root);
+    bool checksametree(Node<T>* tree){
+      return checksametree(root,tree);
     }
 
 //---------------validacion de arboles iguales definicion
     bool checksametree(Node<T>* nodo1,Node<T>* nodo2){
-      if(nodo1||nodo2){
-        if(nodo1->key == nodo2->key){
-            return( checksametree(nodo1->left,nodo2->left)&&
-            checksametree(nodo1->right,nodo2->right) );
-        }
-        else return false;}
-      else return true;       
+      if (nodo1== nodo2)  return true;
+      if ((nodo1 == nullptr) || (nodo2 == nullptr))  return false;
+
+      return ((nodo1->key == nodo2->key) && checksametree (nodo1->left,nodo2->left )&& checksametree(nodo1->right, nodo2->right));
     }
 //----------------------------
 
@@ -50,7 +47,7 @@ public:
     bool checkAVL(Node<T>*nodo){
       if (nodo == nullptr) 
         return true;  
-      if (hight(nodo,0)-hight(nodo->left,0)>1||hight(nodo,0)-hight(nodo->right,0)>1) 
+      else if (hight(nodo,0)-hight(nodo->left,0)>1||hight(nodo,0)-hight(nodo->right,0)>1) 
         return false; 
   
       return (checkAVL(nodo->left)   && checkAVL(nodo->right));

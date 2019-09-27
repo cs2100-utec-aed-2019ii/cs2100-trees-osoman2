@@ -21,10 +21,14 @@ int main(){
     farbol1->insert(4);
     farbol1->insert(2);    
 
+    cout<<"Imprimiendo arbol1"<<endl;
+    farbol1->printtree();
+
+    cout<<"Imprimiendo arbol original"<<endl;
     farbol->printtree();
     //cout<<(farbol->findmin(farbol->root))->key<<endl;
     //cout<<(farbol->findmax(farbol->root))->key<<endl;
-    //cout<<"1 si son iguales,0 si no lo son: "<<farbol->checksametree(farbol1)<<endl;
+    cout<<"1 si los arboles son iguales,0 si no lo son: "<<farbol->checksametree(farbol1->root)<<endl;
     //
    
     farbol->pret_tr();farbol->int_tr();farbol->post_tr(); 
@@ -39,8 +43,6 @@ int main(){
     cout<<"1 si es ABS,0 si no lo es: "<<farbol->BSTvalidate()<<endl;
     cout<<"1 si es Completo,0 si no lo es: "<<farbol->validateComplete()<<endl;
     cout<<"1 si es AVL,0 si no lo es: "<<farbol->checkAVL()<<endl;
-
-    farbol->printtree();
     farbol->clear();
     delete farbol;
     delete farbol1;
