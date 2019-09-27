@@ -79,20 +79,34 @@ public:
     }
 
 
-    bool complete(Node<T>*nodo){
-        
-       if(nodo->left){
-          if(nodo->left->left==nullptr && nodo->left->right) return true;
-          complete(nodo->left);
-       }
-       if(nodo->right){
-
-          complete(nodo->right);
-       }
+// validacion completa ----------
+        //contar nodos
+    void countNodes() 
+    { std::cout<<"La cantidad de nodos es: "<<countNodes(root)<<std::endl;
     }
+    unsigned int countNodes(Node<T>* nodo) 
+    { 
+    if (nodo == nullptr) 
+        return 0; 
+    return 1 + countNodes(nodo->left) + countNodes(nodo->right); 
+    }
+        //------------- 
+    bool validateComplete(){
+        return validateComplete(root,0,countNodes(root));
+    }
+    bool validateComplete (Node<T>* nodo, unsigned int index,unsigned int number_nodes){
+    if (nodo == nullptr) 
+        return true;  
+    if (index >= number_nodes) 
+        return false; 
+  
+    return (validateComplete(nodo->left, 2*index + 1, number_nodes) && validateComplete(nodo->right, 2*index + 2, number_nodes)); 
+    } 
+
+//-----------------
 
 
-    //validación--------------
+    //validaciónBST--------------
     bool BSTvalidate(){
       return BSTvalidate(root,findmin(root)->key,findmax(root)->key);
     }
@@ -137,9 +151,6 @@ public:
 
     }
 
-    bool checkBST(){
-
-    }
 
     void convertBST(){
 

@@ -20,21 +20,19 @@ int main(){
     //cout<<(farbol->findmin(farbol->root))->key<<endl;
     //cout<<(farbol->findmax(farbol->root))->key<<endl;
 
-    cout<<farbol->root->key<<endl;
-    cout<<farbol->root->left->key <<endl;
-    cout<<farbol->root->right->key<<endl;
-  
     //
-    cout<<farbol->root->key<<endl;
+   
     farbol->pret_tr();farbol->int_tr();farbol->post_tr(); 
+    farbol->countNodes();
     cout<<"Altura:"<<farbol->hight()<<endl;
-    
     cout<<"El ancestro de "<<(farbol->ancestor((farbol->root->right)->right))->key<<" es "<<farbol->root->key<<endl;
  
     farbol->deleteNode(2);
     farbol->deleteNode(5);
+    farbol->countNodes();
     farbol->pret_tr();farbol->int_tr();farbol->post_tr();
     cout<<"1 si es ABS,0 si no lo es: "<<farbol->BSTvalidate()<<endl;
+    cout<<"1 si es Completo,0 si no lo es: "<<farbol->validateComplete()<<endl;
     farbol->clear();
     
 
