@@ -22,6 +22,41 @@ public:
           std::cout<<"El nodo eliminado es: "<<element<<std::endl;
          deleteNode(root,element);
     }
+
+    bool validateComplete(){
+        return validateComplete(root,0,countNodes(root));
+    }
+    bool checksametree(Tree<T>*& tree){
+      return checksametree(root,tree->root);
+    }
+
+//---------------validacion de arboles iguales definicion
+    bool checksametree(Node<T>* nodo1,Node<T>* nodo2){
+      if(nodo1||nodo2){
+        if(nodo1->key == nodo2->key){
+            return( checksametree(nodo1->left,nodo2->left)&&
+            checksametree(nodo1->right,nodo2->right) );
+        }
+        else return false;}
+      else return true;       
+    }
+//----------------------------
+
+
+//-------------Avl
+    bool checkAVL(){
+        return checkAVL(root);
+    }
+    bool checkAVL(Node<T>*nodo){
+      if (nodo == nullptr) 
+        return true;  
+      if (hight(nodo,0)-hight(nodo->left,0)>1||hight(nodo,0)-hight(nodo->right,0)>1) 
+        return false; 
+  
+      return (checkAVL(nodo->left)   && checkAVL(nodo->right));
+    }
+
+//------------------------------
     //minnode    
     Node<T>* findmin(Node<T>*aux){
         if(aux){
@@ -91,9 +126,7 @@ public:
     return 1 + countNodes(nodo->left) + countNodes(nodo->right); 
     }
         //------------- 
-    bool validateComplete(){
-        return validateComplete(root,0,countNodes(root));
-    }
+    
     bool validateComplete (Node<T>* nodo, unsigned int index,unsigned int number_nodes){
     if (nodo == nullptr) 
         return true;  
@@ -143,13 +176,21 @@ public:
         else return nullptr;
     }
 
-    void printtree(Tree&){
-
+    void printtree(){
+      printtree(root,0);
+    }
+    void printtree(Node<T>*nodo,int cont){
+        if (nodo ==nullptr)return;
+        else{
+        printtree(nodo->right,cont+1);
+        for(int i = 0;i<cont;i++){
+          std::cout<<"  ";
+          }
+        }
+        std::cout<<nodo->key<<std::endl;
+        printtree(nodo->left,cont+1);
     }
 
-    bool isbalanced(Tree&){
-
-    }
 
 
     void convertBST(){
@@ -224,8 +265,6 @@ void deleteNode(Node<T>* nodo, const T& key)
 
 
 
-
-   
 
 
 //---------------
