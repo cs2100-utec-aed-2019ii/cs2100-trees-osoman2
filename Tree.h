@@ -114,13 +114,13 @@ public:
     }
     //definición
     Node<T>* ancestor(Node<T>* nodo,Node<T>*buscado){
-        if(nodo){
+        if(nodo&&buscado){
           if(buscado->key<nodo->key){
-            if(buscado->key==nodo->left->key ||buscado->key== nodo->right->key) return nodo;
+            if(buscado->key==nodo->left->key ) return nodo;
             else return ancestor(nodo->left,buscado);
           }
           else if(buscado->key>nodo->key){
-            if (buscado->key==nodo->left->key ||buscado->key== nodo->right->key) return nodo;
+            if (buscado->key== nodo->right->key) return nodo;
             else return ancestor(nodo->right,buscado);
           }
         }
@@ -194,11 +194,13 @@ void deleteNode(Node<T>* nodo, const T& key)
           else if(aux->right == temp)aux->right = nullptr;
           delete temp;return;
       }
-      Node<T>* aux = ancestor(nodo);
-      if(aux->left == nodo) aux->left = nullptr;
-      else if(aux->right == nodo)aux->right = nullptr;
-      delete nodo;return;
-
+      else{
+      Node<T>* temp =nodo; 
+      Node<T>* aux = ancestor(temp);
+      if(aux->left == temp) aux->left = nullptr;
+      else if(aux->right == temp)aux->right = nullptr;
+      delete temp;return;
+      }
     }
       
       
