@@ -17,8 +17,8 @@ int main(){
     farbol->insert(11);
 
 
-    cout<<(farbol->findmin(farbol->root))->key<<endl;
-    cout<<(farbol->findmax(farbol->root))->key<<endl;
+    //cout<<(farbol->findmin(farbol->root))->key<<endl;
+    //cout<<(farbol->findmax(farbol->root))->key<<endl;
 
     cout<<farbol->root->key<<endl;
     cout<<farbol->root->left->key <<endl;
@@ -30,7 +30,8 @@ int main(){
     cout<<"Altura:"<<farbol->hight()<<endl;
     
     cout<<"El ancestro de "<<(farbol->ancestor((farbol->root->right)->right))->key<<" es "<<farbol->root->key<<endl;
-    
+    farbol->deleteNode(5);
+    farbol->pret_tr();farbol->int_tr();farbol->post_tr();
     farbol->clear();
     
 

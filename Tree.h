@@ -19,7 +19,7 @@ public:
     }
     
     void deleteNode(const T& element){
-        deleteNode(element,root);
+         deleteNode(root,element);
     }
     //minnode    
     Node<T>* findmin(Node<T>*aux){
@@ -40,9 +40,6 @@ public:
         }
     }
 
-    bool verificar(T valor){
-        
-    }
 
     unsigned int hight(void){
       return hight(root,0);
@@ -79,15 +76,35 @@ public:
     }    
 
     Node<T>* next_samel(Node<T>* nodo){
-
+      
     }
 
-    bool complete(Tree&){
 
+    bool complete(Node<T>*nodo){
+        
+       if(nodo->left){
+          if(nodo->left->left==nullptr && nodo->left->right) return true;
+          complete(nodo->left);
+       }
+       if(nodo->right){
+
+          complete(nodo->right);
+       }
+    }
+
+    bool BSTvalidate(Node<T>*n){
+        if(n->left->key>n->key||n->right->key<n->key)return false;
+        else if(n->left->key<n->key){
+            BSTvalidate(n->left);
+        }
+
+        else if(n->right->key>n->key){
+            BSTvalidate(n->right);
+        }
     }
     
     void clear(void){
-      std::cout<<"Eliminación de nodos: ";
+      std::cout<<"Eliminación de arbol por nodos: ";
       clear(root);
       std::cout<<std::endl;
     }
@@ -95,10 +112,6 @@ public:
     Node<T>* ancestor(Node<T>*nodo){
       return ancestor(root,nodo);
     }
-    
-    
-    
-    
     //definición
     Node<T>* ancestor(Node<T>* nodo,Node<T>*buscado){
         if(nodo){
@@ -146,29 +159,61 @@ public:
       } 
     }
 
-    void deleteNode(const T &Element, Node<T>*&nodo){
-       if (nodo ==nullptr){
-        return;
-      }
-      else{
-        if ( Element < nodo->key ) {
-          deleteNode( Element,nodo->left );
-       }else if ( Element > nodo->key ) {
-          deleteNode( Element,nodo->right );
-        }
-      else if(nodo->left!=nullptr && nodo->right!= nullptr){
-          nodo->set_element(findmin(nodo->right)->key);
-          deleteNode(nodo->key, nodo->right);
-      }
-      else{
-          Node<T>* oldnodo = nodo;
-            nodo = (nodo->left!=nullptr) ? nodo->left :nodo->right;
-            delete oldnodo;
-        }
-      }
+//-----------------
+void swap(Node<T>*a,Node<T>*b){
+  auto temp = a->key; 
+  a->set_element(b->key);
+  b->set_element(temp);
+}
+void deleteNode(Node<T>* nodo, const T& key) 
+{ if(nodo ==nullptr)return;
+
+  else{
+    if(key<nodo->key){
+      deleteNode(nodo->left,key);
     }
+    else if(key>nodo->key){
+      deleteNode(nodo->right,key);
+    }
+    else if(key==nodo->key){
+      if( (nodo->right==nullptr&&nodo->left) ||(nodo->right&&nodo->left) ){
+
+          Node<T>* temp =findmax(nodo->left); 
+          Node<T>* aux = ancestor(temp);
+          swap(nodo,findmax(nodo->left));
+          if(aux->left == temp) aux->left = nullptr;
+          else if(aux->right == temp)aux->right = nullptr;
+          delete temp;return;
+      }
+
+      else if(nodo->left==nullptr&&nodo->right ){
+          Node<T>* temp =findmin(nodo->right);
+          Node<T>* aux = ancestor(temp);
+          swap(nodo,findmin(nodo->right));
+          if(aux->left == temp) aux->left = nullptr;
+          else if(aux->right == temp)aux->right = nullptr;
+          delete temp;return;
+      }
+      Node<T>* aux = ancestor(nodo);
+      if(aux->left == nodo) aux->left = nullptr;
+      else if(aux->right == nodo)aux->right = nullptr;
+      delete nodo;return;
+
+    }
+      
+      
+  }
+      
+}
 
 
+
+
+
+   
+
+
+//---------------
   //definicion de recorridos
 
   void inO(Node<T> *nodo ) const {
