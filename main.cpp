@@ -12,7 +12,7 @@ int main(){
     farbol->insert(2);
     farbol->insert(7);
     farbol->insert(9);
-    //farbol->insert(8);
+    farbol->insert(8);
     farbol->insert(6);
     //farbol->insert(10);
     //farbol->insert(11);
@@ -47,6 +47,7 @@ int main(){
     cout<<"1 si es ABS,0 si no lo es: "<<farbol->BSTvalidate()<<endl;
     cout<<"1 si es Completo,0 si no lo es: "<<farbol->validateComplete()<<endl;
     cout<<"1 si es AVL,0 si no lo es: "<<farbol->checkAVL()<<endl;
+    farbol->printcaminos();
     farbol->clear();
     delete farbol;
     delete farbol1;
