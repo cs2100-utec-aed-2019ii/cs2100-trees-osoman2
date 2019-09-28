@@ -76,13 +76,6 @@ public:
           return aux;
         }
     }
-//Extracción de hojas
-
-
-
-
-
-//
 //Tamaño----------------------------------
     unsigned int hight(void){
       return hight(root,0);
