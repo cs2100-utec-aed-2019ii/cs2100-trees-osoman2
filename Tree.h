@@ -2,6 +2,7 @@
 #define TREE_H
 #include "Node.h"
 #include <iostream>
+#include <vector>
 
 template <typename T>
 
@@ -40,6 +41,9 @@ public:
 //----------------------------
 
 
+
+
+
 //-------------Avl
     bool checkAVL(){
         return checkAVL(root);
@@ -72,8 +76,14 @@ public:
           return aux;
         }
     }
+//Extracción de hojas
 
 
+
+
+
+//
+//Tamaño----------------------------------
     unsigned int hight(void){
       return hight(root,0);
     }
@@ -89,7 +99,7 @@ public:
       }
     } 
 
-    
+ //----------------------------------------   
     void int_tr(void){
       std::cout<<"In-order:"<<std::endl;
       inO(root);
@@ -185,8 +195,49 @@ public:
           }
         }
         std::cout<<nodo->key<<std::endl;
-        printtree(nodo->left,cont+1);
-    }
+        printtree(nodo->left,cont+1);}
+//Root to Leaf
+
+  void printcaminos(){
+    std::cout<<"Impresion de caminos: "<<std::endl;
+    std::vector<T>contenedor;
+    printcaminos(contenedor,root);
+  }
+
+
+  void printcaminos(std::vector<T>&vector,Node<T>* nodo){
+    if (nodo == nullptr)return;
+		vector.push_back(nodo->key);int tam = vector.size();
+		if (nodo->left == nullptr && nodo->right == nullptr) {std::cout<<"Para la hoja "<<vector[tam-1]<<": ";
+      for ( int i = 0; i < tam; i++) std::cout <<vector[i] << " ";
+			std::cout << std::endl;
+		}
+		printcaminos(vector,nodo->left);
+		printcaminos(vector,nodo->right);
+		vector.pop_back();
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -194,9 +245,6 @@ public:
 
     }
 
-    int leafheigh(){
-
-    }
 
     //sobrecargas
 
